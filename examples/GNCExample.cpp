@@ -36,7 +36,7 @@ using namespace std;
 using namespace gtsam;
 
 int main() {
-  cout << "Graduated Non-Convexity Example\n";
+  cout << "Graduated Non-Convexity with Truncated Least Squares Example\n";
 
   NonlinearFactorGraph graph;
 
@@ -66,9 +66,20 @@ int main() {
   gncParams.setLossType(GncLossType::TLS);
 
   // Optimize the graph and print results
-  GncOptimizer<GncParams<LevenbergMarquardtParams>> optimizer(graph, initial, gncParams);
-  Values result = optimizer.optimize();
-  result.print("Final Result:");
+  GncOptimizer<GncParams<LevenbergMarquardtParams>> optimizerTLS(graph, initial, gncParams);
+  Values resultTLS = optimizerTLS.optimize();
+  resultTLS.print("Final Result:");
+
+
+  cout << "Graduated Non-Convexity with Geman-McClure Example\n";
+
+  // Set GNC-specific options
+  gncParams.setLossType(GncLossType::GM);
+
+  // Optimize the graph and print results
+  GncOptimizer<GncParams<LevenbergMarquardtParams>> optimizerGM(graph, initial, gncParams);
+  Values resultGM = optimizerGM.optimize();
+  resultGM.print("Final Result:");
 
   return 0;
 }
