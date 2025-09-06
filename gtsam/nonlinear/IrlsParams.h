@@ -59,7 +59,6 @@ class IrlsParams {
   IrlsLossType lossType = TLS;  ///< Default loss
   size_t maxIterations = 100;  ///<  Maximum number of iterations
   double relativeCostTol = 1e-5;  ///< If relative cost change is below this threshold, stop iterating
-  double weightsTol = 1e-4;  ///< If the weights are within weightsTol from being binary, stop iterating (only for TLS)
   Verbosity verbosity = SILENT;  ///< Verbosity level
 
   /// Use IndexVector for inliers and outliers since it is fast
@@ -85,11 +84,6 @@ class IrlsParams {
   /// Set the maximum relative difference in mu values to stop iterating.
   void setRelativeCostTol(double value) {
     relativeCostTol = value;
-  }
-
-  /// Set the maximum difference between the weights and their rounding in {0,1} to stop iterating.
-  void setWeightsTol(double value) {
-    weightsTol = value;
   }
 
   /// Set the verbosity level.
@@ -144,7 +138,6 @@ class IrlsParams {
     }
     std::cout << "maxIterations: " << maxIterations << "\n";
     std::cout << "relativeCostTol: " << relativeCostTol << "\n";
-    std::cout << "weightsTol: " << weightsTol << "\n";
     std::cout << "verbosity: " << verbosity << "\n";
     for (size_t i = 0; i < knownInliers.size(); i++)
       std::cout << "knownInliers: " << knownInliers[i] << "\n";

@@ -170,7 +170,7 @@ class IrlsOptimizer {
     return weights;
   }
 
-  /// Compute optimal solution using graduated non-convexity.
+  /// Compute optimal solution using IRLS.
   Values optimize() {
     NonlinearFactorGraph graph_initial = this->makeWeightedGraph(weights_);
     BaseOptimizer baseOptimizer(
